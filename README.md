@@ -1,3 +1,5 @@
+# **NGINX Ingress Controller training**
+---
 # Challenge 1 - Configure a simple app on a Kubernetes cluster
 
 In this challenge, you will:
