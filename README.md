@@ -9,11 +9,7 @@ In this challenge, you will:
 ### Step 1: Create the Cluster
 Create your minikube cluster with this command:
 
-<<<<<<< HEAD
-`$ minikube start` 
-=======
 `$ minikube start`
->>>>>>> c0f294d (first commit)
 
 ## Install the app
 ### Step 1: Create a Deployment
