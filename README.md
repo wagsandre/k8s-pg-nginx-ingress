@@ -1,7 +1,7 @@
 # **NGINX Ingress Controller training (WIP)**
 
 The following challanges is considering that you have Docker, Minikube and Helm installed.
-If you don't, you might use `k8s_install.sh` and `helm_install.sh` scripts to install them in a Debian based system.
+If you don't, you might use `k8s_install.sh` and `helm_install.sh` scripts to install them in a Ubuntu based system.
 
 ---
 
