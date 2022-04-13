@@ -59,35 +59,48 @@ install_minikube(){
       echo -e --------------------------
       sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 
+      echo -e "Add user to the docker group"
+      echo -e ------------------------------
+      sudo usermod -aG docker $USER && newgrp docker
+
       echo -e "Verifying Docker installation"
       echo -e -------------------------------
-      sudo docker run hello-world
-
+      docker run hello-world
       if [ $? != 0 ]; then
         echo -e "Something get wrong. Exiting..."
         echo -e ---------------------------------
         exit 1
       fi
+
     fi
     echo -e "Installing Minikube"
     echo -e ---------------------
     curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
     sudo install minikube-linux-amd64 /usr/local/bin/minikube
+
+    echo -e "Removing installation file"
+    echo -e ----------------------------
+    rm -rf minikube-linux-amd64
   fi
 }
 
 install_minikube
+if [ $? != 0 ]; then
+  echo -e "Something get wrong. Please check the Minikube installation."
+  echo -e --------------------------------------------------------------
+  exit 1
+fi
 
 echo -e "Creating Cluster name:${CLUSTER_NAME}"
 echo -e -----------------------
 #minikube start -p ${CLUSTER_NAME} --extra-config=apiserver.service-node-port-range=1-65535
 minikube start -p ${CLUSTER_NAME}
-
-echo -e "Check Cluster status"
-echo -e ----------------------
-minikube status -p ${CLUSTER_NAME}
 if [ $? != 0 ]; then
   echo -e "Something get wrong. Please check the Minikube output log!"
+  exit 1
 else
+  minikube status -p ${CLUSTER_NAME}
+  echo -e ---------------------------------------------------
   echo -e "Your cluster ${CLUSTER_NAME} is ready to be used!"
+  echo -e ---------------------------------------------------
 fi
